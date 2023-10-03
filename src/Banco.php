@@ -28,7 +28,7 @@ abstract class Banco{
                 PDO::ATTR_ERRMODE, 
                 PDO::ERRMODE_EXCEPTION
             );
-            echo "Certo";
+            //teste echo "Certo";
         } catch(Exception $erro){ //Exception é uma função do PHP como PDO
             die("Deu ruim: ".$erro->getMessage());
         }
