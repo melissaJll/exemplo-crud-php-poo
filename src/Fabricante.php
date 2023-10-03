@@ -1,6 +1,7 @@
 <?php
 namespace ExemploCrudPoo;
 
+use Exception; //acrescentar
 use PDO;
 
 final class fabricante{
@@ -14,6 +15,23 @@ final class fabricante{
         // Como é construtor, no momento e que um objeto Fabricante for criado, automaticamente será feita a chamada do método "conecta" existente na classe Banco
         $this->conexao = Banco::conecta();
     }
+
+    public function lerFabricantes():array { //Tirar a pdo conexao como parametro
+        $sql = "SELECT * FROM fabricantes ORDER BY nome";
+        
+        try {
+            $consulta = $this->conexao->prepare($sql); //acrescentar this para usar o atributo conexao
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro: ".$erro->getMessage());
+        }    
+    
+        return $resultado;
+    } 
+
+
+
 
 
     public function getId(): int

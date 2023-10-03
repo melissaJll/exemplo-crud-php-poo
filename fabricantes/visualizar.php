@@ -2,9 +2,9 @@
 use ExemploCrudPoo\fabricante;
 
 require_once "../vendor/autoload.php";
-// $listaDeFabricantes = lerFabricantes($conexao);
-// $quantidade = count($listaDeFabricantes);
 $fabricante = new Fabricante;
+$listaDeFabricantes = $fabricante->lerFabricantes(); //metodo precisa ser acessado pois é private do objeto
+$quantidade = count($listaDeFabricantes);
 
 ?>
 <pre><?=var_dump($fabricante)?></pre>
