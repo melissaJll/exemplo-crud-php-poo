@@ -1,0 +1,10 @@
+{
+    "name": "melissa/exemplo-crud-php-poo",
+    "description": "Versão exemplo usando orientação a objetos",
+    "autoload":{
+        "psr-4": {
+            "ExemploCrudPoo\\": "src/"
+
+        }
+    }
+}
