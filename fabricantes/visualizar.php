@@ -1,8 +1,14 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-$listaDeFabricantes = lerFabricantes($conexao);
-$quantidade = count($listaDeFabricantes);
+use ExemploCrudPoo\fabricante;
+
+require_once "../vendor/autoload.php";
+// $listaDeFabricantes = lerFabricantes($conexao);
+// $quantidade = count($listaDeFabricantes);
+$fabricante = new Fabricante;
+
 ?>
+<pre><?=var_dump($fabricante)?></pre>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
