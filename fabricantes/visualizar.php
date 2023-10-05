@@ -1,5 +1,5 @@
 <?php
-use ExemploCrudPoo\fabricante;
+use ExemploCrudPoo\Fabricante;
 
 require_once "../vendor/autoload.php";
 $fabricante = new Fabricante;

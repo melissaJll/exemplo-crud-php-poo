@@ -1,6 +1,6 @@
 <?php
 
-use ExemploCrudPoo\fabricante;
+use ExemploCrudPoo\Fabricante;
 // pt1
 require_once "../vendor/autoload.php";
 $fabricante = new Fabricante; //gera use
