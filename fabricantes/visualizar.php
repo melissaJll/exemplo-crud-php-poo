@@ -7,8 +7,6 @@ $listaDeFabricantes = $fabricante->lerFabricantes(); //metodo precisa ser acessa
 $quantidade = count($listaDeFabricantes);
 
 ?>
-<pre><?=var_dump($fabricante)?></pre>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
