@@ -15,7 +15,7 @@ final class fabricante{
         // Como é construtor, no momento e que um objeto Fabricante for criado, automaticamente será feita a chamada do método "conecta" existente na classe Banco
         $this->conexao = Banco::conecta();
     }
-
+//Vizualizar
     public function lerFabricantes():array { //Tirar a pdo conexao como parametro
         $sql = "SELECT * FROM fabricantes ORDER BY nome";
         
@@ -31,7 +31,7 @@ final class fabricante{
     } 
 
     
-
+// Inserir
     public function inserirFabricante():void {
         $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
 
@@ -44,6 +44,23 @@ final class fabricante{
         }
 
     }
+
+
+//Atualizar 
+    public function lerUmFabricante():array {
+        $sql = "SELECT * FROM fabricantes WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT); //Dentro da propria classe $this->id | fora da classe $this->getId
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro ao carregar: ".$erro->getMessage());
+        }
+
+        return $resultado;
+    } 
 
 
 
