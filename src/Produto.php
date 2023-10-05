@@ -46,6 +46,28 @@ class Produto{
 
 
 
+    function inserirProduto():void {
+    
+        $sql = "INSERT INTO produtos(
+            nome, preco, quantidade, descricao, fabricante_id
+        ) VALUES(
+            :nome, :preco, :quantidade, :descricao, :fabricanteId
+        )";    
+    
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $consulta->bindValue(":preco", $this->preco, PDO::PARAM_STR);
+            $consulta->bindValue(":quantidade", $this->quantidade, PDO::PARAM_INT);
+            $consulta->bindValue(":descricao", $this->descricao, PDO::PARAM_STR);
+            $consulta->bindValue(":fabricanteId", $this->fabricante_Id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die("Erro ao inserir: ".$erro->getMessage());
+        }
+    }
+
+
 
 
     
@@ -67,7 +89,7 @@ class Produto{
 
     public function setNome(string $nome): void
     {
-        $this->nome = $nome;
+        $this->nome = filter_var($nome,FILTER_SANITIZE_SPECIAL_CHARS); //retorna sanitizado
     }
 
 
@@ -78,7 +100,8 @@ class Produto{
     }
     public function setPreco(float $preco): void
     {
-        $this->preco = $preco;
+        $this->preco = filter_var($preco,FILTER_SANITIZE_NUMBER_FLOAT,
+        FILTER_FLAG_ALLOW_FRACTION);
     }
 
 
@@ -90,7 +113,7 @@ class Produto{
 
     public function setDescricao(string $descricao): void
     {
-        $this->descricao = $descricao;
+        $this->descricao = filter_var($descricao, FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
 
@@ -102,7 +125,7 @@ class Produto{
 
     public function setQuantidade(int $quantidade): void
     {
-        $this->quantidade = $quantidade;
+        $this->quantidade = filter_var($quantidade, FILTER_SANITIZE_NUMBER_INT);
 
     }
 
@@ -114,6 +137,6 @@ class Produto{
 
     public function setFabricanteId(int $fabricante_Id): void
     {
-        $this->fabricante_Id = $fabricante_Id;
+        $this->fabricante_Id = filter_var($fabricante_Id, FILTER_SANITIZE_NUMBER_INT);
     }
 }

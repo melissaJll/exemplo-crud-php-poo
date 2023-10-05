@@ -1,31 +1,25 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-require_once "../src/funcoes-produtos.php";
 
-$listaDeFabricantes = lerFabricantes($conexao);
+use ExemploCrudPoo\Fabricante;
+use ExemploCrudPoo\Produto;
+
+require_once "../vendor/autoload.php";
+$objFabricante = new Fabricante; //instanciando para usar o método da classe Fabricante
+$listaDeFabricantes = $objFabricante->lerFabricantes();
 
 if(isset($_POST['inserir'])){
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
+    $produto = new Produto;
+    $produto->setNome($_POST['nome']); //setNome(defina como nome o valor) post/captura do formulario
     
-    $preco = filter_input(
-        INPUT_POST, "preco", 
-        FILTER_SANITIZE_NUMBER_FLOAT,
-        FILTER_FLAG_ALLOW_FRACTION
-    );
+    $produto->setPreco($_POST['preco']);
 
-    $quantidade = filter_input(
-        INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT
-    );
+    $produto->setQuantidade($_POST['quantidade']);
 
-    $fabricanteId = filter_input(
-        INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT
-    );
+    $produto->setFabricanteId($_POST['fabricante']);
 
-    $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_SPECIAL_CHARS);
+    $produto->setDescricao($_POST['descricao']);
 
-    inserirProduto(
-        $conexao, $nome, $preco, $quantidade, $fabricanteId, $descricao
-    );
+    $produto->inserirProduto();
 
     header("location:visualizar.php");
 }
