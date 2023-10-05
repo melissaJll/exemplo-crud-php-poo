@@ -51,7 +51,6 @@ final class fabricante{
 
 
 
-
     public function getId(): int
     {
         return $this->id;
@@ -68,8 +67,8 @@ final class fabricante{
         return $this->nome;
     }
 
-    public function setNome(string $nome): void
+    public function setNome(string $nome): void //inserir.php Post['nome'] -fornece>  este parametro string $nome ...
     {
-        $this->nome = $nome;
+        $this->nome = filter_var($nome,FILTER_SANITIZE_SPECIAL_CHARS); //... atributo nome recebe $nome;
     }
 }
