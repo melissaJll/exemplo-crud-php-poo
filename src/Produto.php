@@ -20,7 +20,6 @@ class Produto{
 
 
 
-
     function lerProdutos():array {
         $sql = "SELECT 
                     produtos.id,
