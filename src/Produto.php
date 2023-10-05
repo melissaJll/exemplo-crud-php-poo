@@ -67,6 +67,20 @@ class Produto{
         }
     }
 
+    
+
+    function lerUmProduto():array {
+        $sql = "SELECT * FROM produtos WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die("Erro ao carregar dados: ".$erro->getMessage());
+        }    
+        return $resultado;
+    }
 
 
 
@@ -78,7 +92,7 @@ class Produto{
 
     public function setId(int $id): void
     {
-        $this->id = $id;
+        $this->id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
     }
 
 
