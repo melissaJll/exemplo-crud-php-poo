@@ -4,7 +4,7 @@
 
     
 if( isset($_POST['inserir']) ){
-    $fabricante = new fabricante; //por isso use
+    $fabricante = new Fabricante; //por isso use
     $fabricante->setNome($_POST['nome']);//captura no post(formulario) sem sanitizar
 
     //$nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);

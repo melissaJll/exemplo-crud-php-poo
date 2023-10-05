@@ -46,7 +46,7 @@ final class fabricante{
     }
 
 
-//Atualizar 
+//Atualizar 1
     public function lerUmFabricante():array {
         $sql = "SELECT * FROM fabricantes WHERE id = :id";
 
@@ -61,6 +61,27 @@ final class fabricante{
 
         return $resultado;
     } 
+    //pt2
+
+    public function atualizarFabricante():void {
+        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+        
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $consulta->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die("Erro ao atualizar: ".$erro->getMessage());
+        }
+    } 
+
+
+
+
+
+
+//Excluir
 
 
 
@@ -74,7 +95,7 @@ final class fabricante{
     }
     public function setId(int $id): void
     {
-        $this->id = $id;
+        $this->id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
     }
 
@@ -83,7 +104,7 @@ final class fabricante{
     {
         return $this->nome;
     }
-
+    //Já foi sanitizado então a partir de agora sempre estará sanitizado então em atualizar pt2 não precisa sanitizar nome 
     public function setNome(string $nome): void //inserir.php Post['nome'] -fornece>  este parametro string $nome ...
     {
         $this->nome = filter_var($nome,FILTER_SANITIZE_SPECIAL_CHARS); //... atributo nome recebe $nome;
