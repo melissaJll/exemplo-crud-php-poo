@@ -12,27 +12,17 @@ $produto->setId($_GET['id']);
 $dadosUmProduto = $produto->lerUmProduto(); //Mudar no formulario o nome da array associativa que foi retornada pela função lerUmProduto e armazenada na var  $dadosUmProduto
 
 if(isset($_POST['atualizar'])){
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
+    $produto->setNome($_POST['nome']);
     
-    $preco = filter_input(
-        INPUT_POST, "preco", 
-        FILTER_SANITIZE_NUMBER_FLOAT,
-        FILTER_FLAG_ALLOW_FRACTION
-    );
+    $produto->setPreco($_POST['preco']);
 
-    $quantidade = filter_input(
-        INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT
-    );
+    $produto->setQuantidade($_POST['quantidade']);
 
-    $fabricanteId = filter_input(
-        INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT
-    );
+    $produto->setFabricanteId($_POST['fabricante']);
 
-    $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_SPECIAL_CHARS);
+    $produto->setDescricao($_POST['descricao']);
 
-    atualizarProduto(
-        $conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricanteId
-    );
+    $produto->atualizarProduto();
 
     header("location:visualizar.php");
 }
