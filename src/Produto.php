@@ -15,12 +15,12 @@ class Produto{
     private PDO $conexao;
 
     public function __construct() {
-        $this->conexao = Banco::conecta();
+        $this->conexao = Banco::conecta(); //Guarda o método estatico conecta() do banco
     }
 
 
 
-    function lerProdutos():array {
+    public function lerProdutos():array {
         $sql = "SELECT 
                     produtos.id,
                     produtos.nome AS produto,
@@ -45,7 +45,7 @@ class Produto{
 
 
 
-    function inserirProduto():void {
+    public function inserirProduto():void {
     
         $sql = "INSERT INTO produtos(
             nome, preco, quantidade, descricao, fabricante_id
@@ -68,7 +68,7 @@ class Produto{
 
     
 
-    function lerUmProduto():array {
+    public function lerUmProduto():array {
         $sql = "SELECT * FROM produtos WHERE id = :id";
         try {
             $consulta = $this->conexao->prepare($sql);
@@ -82,7 +82,7 @@ class Produto{
     }
 
 
-    function atualizarProduto():void {
+    public function atualizarProduto():void {
 
         $sql = "UPDATE produtos SET
             nome = :nome,
@@ -105,10 +105,9 @@ class Produto{
     }
 
 
-
     
 
-    function excluirProduto():void {
+    public function excluirProduto():void {
         $sql = "DELETE FROM produtos WHERE id = :id";
         try {
             $consulta = $this->conexao->prepare($sql);
